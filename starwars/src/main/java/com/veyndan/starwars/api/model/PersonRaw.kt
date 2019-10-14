@@ -15,6 +15,5 @@ internal data class PersonRaw(
     @Json(name = "skin_color") val skinColor: String,
     val species: List<String>,
     val starships: List<String>,
-    val url: String,
     val vehicles: List<String>
 )

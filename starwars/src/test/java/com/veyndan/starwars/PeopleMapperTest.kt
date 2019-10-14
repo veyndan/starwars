@@ -34,7 +34,6 @@ class PeopleMapperTest {
                     "https://swapi.co/api/starships/12/",
                     "https://swapi.co/api/starships/22/"
                 ),
-                url = "https://swapi.co/api/people/1/",
                 vehicles = listOf(
                     "https://swapi.co/api/vehicles/14/",
                     "https://swapi.co/api/vehicles/30/]"
@@ -66,7 +65,6 @@ class PeopleMapperTest {
                         "https://swapi.co/api/starships/12/",
                         "https://swapi.co/api/starships/22/"
                     ),
-                    url = "https://swapi.co/api/people/1/",
                     vehicles = listOf(
                         "https://swapi.co/api/vehicles/14/",
                         "https://swapi.co/api/vehicles/30/]"

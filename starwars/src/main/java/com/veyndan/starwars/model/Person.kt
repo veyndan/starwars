@@ -13,6 +13,5 @@ data class Person(
     val skinColor: String,
     val species: List<String>,
     val starships: List<String>,
-    val url: String,
     val vehicles: List<String>
 )

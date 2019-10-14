@@ -21,7 +21,6 @@ internal object PeopleMapper : Function<PeopleRaw, List<Person>> {
                 skinColor = personRaw.skinColor,
                 species = personRaw.species,
                 starships = personRaw.starships,
-                url = personRaw.url,
                 vehicles = personRaw.vehicles
             )
         }
