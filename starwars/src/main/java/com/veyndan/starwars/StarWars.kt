@@ -9,7 +9,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -19,7 +19,7 @@ class StarWars {
 
     // TODO Store
 
-    private val subject = BehaviorSubject.create<List<Person>>()
+    private val subject = PublishSubject.create<List<Person>>()
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
@@ -37,7 +37,7 @@ class StarWars {
         .subscribeOn(Schedulers.io())
         .map(PeopleMapper)
 
-    fun people(): Observable<List<Person>> = subject.share()
+    fun people(): Observable<List<Person>> = subject.share().startWith(emptyList<Person>())
 
     fun fetchPeople(): Completable = network()
         .doOnSuccess { subject.onNext(it) }
