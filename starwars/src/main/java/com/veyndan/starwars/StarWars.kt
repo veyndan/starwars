@@ -44,6 +44,9 @@ class StarWars {
 
     fun people(): Observable<List<Person>> = subject.share().startWith(emptyList<Person>())
 
+    fun people(searchQuery: String): Observable<List<Person>> = people()
+        .map { people -> people.filter { it.name in searchQuery } }
+
     fun fetchPeople(): Completable = network()
         .doOnSuccess { subject.onNext(it) }
         .ignoreElement()
