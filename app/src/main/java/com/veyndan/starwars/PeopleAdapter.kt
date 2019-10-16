@@ -3,6 +3,7 @@ package com.veyndan.starwars
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.veyndan.starwars.model.Person
 import kotlinx.android.extensions.LayoutContainer
@@ -22,10 +23,25 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val person = people[position]
-
-        holder.name.text = person.name
+        holder.bind(person)
     }
 
     class ViewHolder(override val containerView: View) :
-        RecyclerView.ViewHolder(containerView), LayoutContainer
+        RecyclerView.ViewHolder(containerView), LayoutContainer {
+
+        private var person: Person? = null
+
+        init {
+            containerView.setOnClickListener { view ->
+                val action = PeopleFragmentDirections.profileAction(person!!.name, person!!.name)
+                view.findNavController().navigate(action)
+            }
+        }
+
+        fun bind(person: Person) {
+            this.person = person
+
+            name.text = person.name
+        }
+    }
 }
