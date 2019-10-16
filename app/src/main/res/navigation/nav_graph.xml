@@ -21,7 +21,6 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.veyndan.starwars.ProfileFragment"
-        android:label="{personName}"
         tools:layout="@layout/fragment_profile">
 
         <argument

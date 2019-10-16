@@ -8,6 +8,7 @@ import com.veyndan.starwars.model.Person
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.rxkotlin.flatMapIterable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import retrofit2.Retrofit
@@ -36,6 +37,10 @@ class StarWars {
     private fun network(): Single<List<Person>> = service.people()
         .subscribeOn(Schedulers.io())
         .map(PeopleMapper)
+
+    fun person(personId: String): Observable<Person> = people()
+        .flatMapIterable()
+        .filter { it.name == personId }
 
     fun people(): Observable<List<Person>> = subject.share().startWith(emptyList<Person>())
 

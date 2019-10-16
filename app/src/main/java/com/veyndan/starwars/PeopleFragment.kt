@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_people.view.*
 
 class PeopleFragment : Fragment() {
 
@@ -21,12 +21,12 @@ class PeopleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val peopleView = inflater.inflate(R.layout.fragment_people, container, false) as RecyclerView
+        val rootView = inflater.inflate(R.layout.fragment_people, container, false)
 
         val adapter = PeopleAdapter()
 
-        peopleView.layoutManager = LinearLayoutManager(requireContext())
-        peopleView.adapter = adapter
+        rootView.peopleRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        rootView.peopleRecyclerView.adapter = adapter
 
         val starWars = StarWars()
 
@@ -44,7 +44,7 @@ class PeopleFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
 
-        return peopleView
+        return rootView
     }
 
     override fun onDestroyView() {
