@@ -14,8 +14,6 @@ import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class ProfileFragment : Fragment() {
 
-    private val starWars = StarWars()
-
     private val args by navArgs<ProfileFragmentArgs>()
 
     private val disposables = CompositeDisposable()
@@ -32,11 +30,11 @@ class ProfileFragment : Fragment() {
             view.findNavController().navigateUp()
         }
 
-        disposables += starWars.fetchPeople()
+        disposables += StarWars.fetchPeople()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
 
-        disposables += starWars.person(args.personId)
+        disposables += StarWars.person(args.personId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { person ->
 

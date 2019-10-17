@@ -17,7 +17,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 
-class StarWars {
+// TODO Change to class and use Dagger to inject instances
+object StarWars {
 
     // TODO Replace with database backed store
     private var store: List<Person>? = null

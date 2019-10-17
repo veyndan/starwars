@@ -28,12 +28,10 @@ class PeopleFragment : Fragment() {
         rootView.peopleRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         rootView.peopleRecyclerView.adapter = adapter
 
-        val starWars = StarWars()
-
         disposables += rootView.searchBar.afterTextChangeEvents()
             .flatMap { textChangeEvent ->
-                starWars.fetchPeople()
-                    .andThen(starWars.people(searchQuery = textChangeEvent.editable.toString()))
+                StarWars.fetchPeople()
+                    .andThen(StarWars.people(searchQuery = textChangeEvent.editable.toString()))
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { people ->
