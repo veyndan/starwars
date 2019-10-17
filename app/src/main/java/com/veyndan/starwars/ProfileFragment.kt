@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
@@ -30,14 +31,13 @@ class ProfileFragment : Fragment() {
             view.findNavController().navigateUp()
         }
 
-        disposables += StarWars.fetchPeople()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+        rootView.detailsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        disposables += StarWars.person(args.personId)
+        disposables += StarWars.fetchPeople()
+            .andThen(StarWars.person(args.personId))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { person ->
-
+                rootView.detailsRecyclerView.adapter = ProfileAdapter(person)
             }
 
         return rootView

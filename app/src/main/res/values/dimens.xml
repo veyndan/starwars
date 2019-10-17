@@ -2,4 +2,6 @@
 <resources>
     <dimen name="app_bar_height_tall">192dp</dimen>
     <dimen name="toolbarInsetHorizontal">12dp</dimen>
+    <dimen name="two_line_list_inset_horizontal">16dp</dimen>
+    <dimen name="two_line_list_height">64dp</dimen>
 </resources>
