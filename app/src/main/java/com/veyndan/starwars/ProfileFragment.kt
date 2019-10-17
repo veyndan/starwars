@@ -10,7 +10,6 @@ import androidx.navigation.fragment.navArgs
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class ProfileFragment : Fragment() {
@@ -34,12 +33,10 @@ class ProfileFragment : Fragment() {
         }
 
         disposables += starWars.fetchPeople()
-            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
 
         disposables += starWars.person(args.personId)
-            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { person ->
 

@@ -1,7 +1,6 @@
 package com.veyndan.starwars
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.jakewharton.rxbinding3.widget.afterTextChangeEvents
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_people.view.*
 
 class PeopleFragment : Fragment() {
@@ -37,7 +35,6 @@ class PeopleFragment : Fragment() {
                 starWars.fetchPeople()
                     .andThen(starWars.people(searchQuery = textChangeEvent.editable.toString()))
             }
-            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { people ->
                 adapter.people.clear()
