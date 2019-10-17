@@ -1,11 +1,13 @@
 package com.veyndan.starwars
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jakewharton.rxbinding3.widget.afterTextChangeEvents
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
@@ -30,7 +32,11 @@ class PeopleFragment : Fragment() {
 
         val starWars = StarWars()
 
-        disposables += starWars.people()
+        disposables += rootView.searchBar.afterTextChangeEvents()
+            .flatMap { textChangeEvent ->
+                starWars.fetchPeople()
+                    .andThen(starWars.people(searchQuery = textChangeEvent.editable.toString()))
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { people ->
@@ -38,11 +44,6 @@ class PeopleFragment : Fragment() {
                 adapter.people.addAll(people)
                 adapter.notifyDataSetChanged()
             }
-
-        disposables += starWars.fetchPeople()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
 
         return rootView
     }

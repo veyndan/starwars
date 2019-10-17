@@ -19,7 +19,7 @@
             app:title="@string/app_name" />
 
         <EditText
-            android:id="@+id/search_bar"
+            android:id="@+id/searchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/toolbarInsetHorizontal"
