@@ -46,11 +46,11 @@ object StarWars {
 
     fun person(personId: String): Observable<Person> = people()
         .flatMapIterable()
-        .filter { it.name == personId }
+        .filter { it.name == personId } // TODO Make personId reference _id from database
 
     fun people(): Observable<List<Person>> = subject.share().startWith(emptyList<Person>())
 
-    fun people(searchQuery: String): Observable<List<Person>> = subject.share()
+    fun people(searchQuery: String): Observable<List<Person>> = people()
         .map { people -> people.filter { it.name.contains(searchQuery, ignoreCase = true) } }
 
     fun fetchPeople(): Completable = Maybe.concat(disk(), network().toMaybe())
