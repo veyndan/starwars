@@ -13,5 +13,6 @@ data class Person(
     val skinColor: String,
     val species: List<String>,
     val starships: List<String>,
-    val vehicles: List<String>
+    val vehicles: List<String>,
+    var isFavorite: Boolean = false // TODO Change to val
 )

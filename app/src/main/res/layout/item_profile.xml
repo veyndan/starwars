@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/two_line_list_height"
-    android:paddingStart="@dimen/two_line_list_inset_horizontal"
-    android:paddingEnd="@dimen/two_line_list_inset_horizontal">
+    android:paddingStart="@dimen/list_inset_horizontal"
+    android:paddingEnd="@dimen/list_inset_horizontal">
 
     <TextView
         android:id="@+id/title"
